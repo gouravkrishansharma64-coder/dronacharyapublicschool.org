@@ -1,0 +1,598 @@
+import { useState } from 'react';
+import { Menu, X, Phone, Mail, MapPin, Clock, GraduationCap, Users, Shield, Calendar, Award, BookOpen, Home, Info, Building, Contact, CheckCircle, AlertCircle, Search } from 'lucide-react';
+import { ImageWithFallback } from '../components/ImageWithFallback';
+
+import logoImage from '@assets/dps_logo_orignal_1779549682498.png';
+import heroImage from '@assets/WhatsApp_Image_2026-05-22_at_12.16.48_1779549701385.jpeg';
+import aboutImage from '@assets/WhatsApp_Image_2026-05-22_at_08.43.06_1779549701385.jpeg';
+import galleryImage1 from '@assets/WhatsApp_Image_2026-05-22_at_08.43.06_(1)_1779549701384.jpeg';
+import galleryImage2 from '@assets/WhatsApp_Image_2026-05-22_at_08.43.05_1779549701384.jpeg';
+import galleryImage3 from '@assets/WhatsApp_Image_2026-05-22_at_08.52.40_1779549701385.jpeg';
+import galleryImage4 from '@assets/WhatsApp_Image_2026-05-22_at_12.16.48_1779549701385.jpeg';
+import galleryImage5 from '@assets/WhatsApp_Image_2026-05-22_at_12.17.07_1779549701386.jpeg';
+
+const VERIFIED_RECORD = {
+  rollNo: '166441',
+  name: 'Gouravkrishan Sharma',
+  fatherName: 'Gajanand Sharma',
+  course: 'BA Part 3rd Semester 5th',
+  college: 'University Rajasthan College, Jaipur',
+  internshipCourse: 'Teaching Assistant',
+  duration: '05/03/2026 - 31/03/2026',
+  hours: '120 Hours',
+};
+
+export default function School() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [rollInput, setRollInput] = useState('');
+  const [verificationResult, setVerificationResult] = useState<'found' | 'not-found' | null>(null);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const handleVerify = () => {
+    if (!rollInput.trim()) return;
+    if (rollInput.trim() === VERIFIED_RECORD.rollNo) {
+      setVerificationResult('found');
+    } else {
+      setVerificationResult('not-found');
+    }
+  };
+
+  const handleRollKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleVerify();
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Header/Navigation */}
+      <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white sticky top-0 z-50 shadow-lg">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center gap-3">
+              <img src={logoImage} alt="DPS School Logo" className="w-12 h-12 rounded-full object-cover" />
+              <div>
+                <h1 className="text-xl font-bold">DRONACHARYA PUBLIC SCHOOL</h1>
+                <p className="text-xs text-blue-100">Excellence in Education</p>
+              </div>
+            </div>
+
+            <nav className="hidden md:flex items-center gap-6">
+              <button onClick={() => scrollToSection('home')} className="hover:text-blue-200 transition flex items-center gap-2">
+                <Home className="w-4 h-4" />
+                <span>Home</span>
+              </button>
+              <button onClick={() => scrollToSection('about')} className="hover:text-blue-200 transition flex items-center gap-2">
+                <Info className="w-4 h-4" />
+                <span>About</span>
+              </button>
+              <button onClick={() => scrollToSection('facilities')} className="hover:text-blue-200 transition flex items-center gap-2">
+                <Building className="w-4 h-4" />
+                <span>Facilities</span>
+              </button>
+              <button onClick={() => scrollToSection('contact')} className="hover:text-blue-200 transition flex items-center gap-2">
+                <Contact className="w-4 h-4" />
+                <span>Contact</span>
+              </button>
+              <button
+                onClick={() => scrollToSection('verification')}
+                className="bg-white text-blue-700 font-semibold px-4 py-2 rounded-lg hover:bg-blue-50 transition flex items-center gap-2 shadow"
+              >
+                <Shield className="w-4 h-4" />
+                <span>Verification</span>
+              </button>
+            </nav>
+
+            <button
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {mobileMenuOpen && (
+            <nav className="md:hidden pb-4 space-y-2">
+              <button onClick={() => scrollToSection('home')} className="block w-full text-left py-2 hover:text-blue-200 transition">Home</button>
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 hover:text-blue-200 transition">About</button>
+              <button onClick={() => scrollToSection('facilities')} className="block w-full text-left py-2 hover:text-blue-200 transition">Facilities</button>
+              <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 hover:text-blue-200 transition">Contact</button>
+              <button onClick={() => scrollToSection('verification')} className="block w-full text-left py-2 font-semibold text-blue-200 hover:text-white transition">
+                <Shield className="w-4 h-4 inline mr-1" />
+                Verification
+              </button>
+            </nav>
+          )}
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section id="home" className="relative bg-gradient-to-br from-blue-50 to-indigo-50 py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-5xl font-bold text-gray-900 mb-4">
+                Welcome to <span className="text-blue-600">DRONACHARYA PUBLIC SCHOOL</span>
+              </h2>
+              <p className="text-xl text-gray-600 mb-6">
+                Nurturing Young Minds Since 2020
+              </p>
+              <p className="text-lg text-gray-700 mb-8">
+                A premier educational institution dedicated to providing quality education for children from Playgroup to Class 6th.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition shadow-lg"
+                >
+                  Enroll Now
+                </button>
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition"
+                >
+                  Learn More
+                </button>
+              </div>
+            </div>
+            <div className="relative">
+              <ImageWithFallback
+                src={heroImage}
+                alt="Students in classroom"
+                className="rounded-2xl shadow-2xl w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Info Bar */}
+      <section className="bg-blue-600 text-white py-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div className="flex items-center justify-center gap-3">
+              <Clock className="w-8 h-8" />
+              <div>
+                <p className="font-semibold">School Hours</p>
+                <p className="text-sm text-blue-100">Mon-Sat: 8:00 AM - 2:00 PM</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-center gap-3">
+              <GraduationCap className="w-8 h-8" />
+              <div>
+                <p className="font-semibold">Classes Offered</p>
+                <p className="text-sm text-blue-100">Playgroup to Class 6th</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-center gap-3">
+              <Users className="w-8 h-8" />
+              <div>
+                <p className="font-semibold">Expert Faculty</p>
+                <p className="text-sm text-blue-100">15 Dedicated Teachers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">About DRONACHARYA PUBLIC SCHOOL</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <ImageWithFallback
+                src={aboutImage}
+                alt="School activities"
+                className="rounded-2xl shadow-xl w-full h-auto"
+              />
+            </div>
+            <div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                Established in 2020, DRONACHARYA PUBLIC SCHOOL has quickly become a cornerstone of quality education in Sujangarh, Rajasthan. Under the visionary leadership of our Principal, <span className="font-semibold text-blue-600">Mr. Deepak Sharma</span>, we have created a nurturing environment where young minds flourish.
+              </p>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                We specialize in early childhood education and primary schooling, offering programs from Playgroup through Class 6th. Our commitment to excellence is reflected in our state-of-the-art facilities, dedicated faculty of 15 experienced teachers, and comprehensive curriculum designed to develop well-rounded individuals.
+              </p>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                At DRONACHARYA PUBLIC SCHOOL, we believe in creating a safe, engaging, and stimulating environment where children can explore, learn, and grow. Our campus features expansive green playgrounds, modern play equipment including slides and toy cars, and a secure learning environment monitored by CCTV cameras.
+              </p>
+              <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
+                <Award className="w-12 h-12 text-blue-600 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-gray-900">Our Vision</p>
+                  <p className="text-sm text-gray-700">To expand our campus environment and provide world-class education, enabling our students to achieve their highest potential and become responsible global citizens.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Facilities Section */}
+      <section id="facilities" className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Facilities</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              We provide a comprehensive learning environment with modern facilities designed to support your child's development
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <GraduationCap className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Outdoor Playground</h3>
+              <p className="text-gray-600">
+                Expansive grass playground with modern play equipment, slides, toy cars, and safe play areas for children to develop physically and socially.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                <BookOpen className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Quality Education</h3>
+              <p className="text-gray-600">
+                Comprehensive curriculum delivered by 15 experienced and dedicated teachers committed to nurturing each child's unique potential.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Calendar className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Monthly PTM</h3>
+              <p className="text-gray-600">
+                Regular Parent-Teacher Meetings held every month to ensure close collaboration and transparency in your child's educational journey.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                <MapPin className="w-8 h-8 text-orange-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Educational Trips</h3>
+              <p className="text-gray-600">
+                Regular educational excursions and field trips to enhance learning experiences and expose children to the world beyond the classroom.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                <Shield className="w-8 h-8 text-red-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">CCTV Security</h3>
+              <p className="text-gray-600">
+                Comprehensive CCTV surveillance system throughout the campus ensuring the safety and security of all students at all times.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Building className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Modern Infrastructure</h3>
+              <p className="text-gray-600">
+                Well-equipped classrooms, play areas with toys and educational materials, and a conducive learning environment for holistic development.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Campus Gallery</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <ImageWithFallback
+              src={galleryImage1}
+              alt="Republic Day celebration with students"
+              className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition"
+            />
+            <ImageWithFallback
+              src={galleryImage2}
+              alt="Teachers with Indian flag"
+              className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition"
+            />
+            <ImageWithFallback
+              src={galleryImage3}
+              alt="Award ceremony"
+              className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition"
+            />
+            <ImageWithFallback
+              src={galleryImage5}
+              alt="Students studying in classroom"
+              className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition"
+            />
+            <ImageWithFallback
+              src={galleryImage4}
+              alt="School building"
+              className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition"
+            />
+            <ImageWithFallback
+              src={aboutImage}
+              alt="School festival"
+              className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Internship Verification Section */}
+      <section id="verification" className="py-20 bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4 shadow-lg">
+              <Shield className="w-8 h-8 text-white" />
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Internship Verification</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600 max-w-xl mx-auto">
+              Verify the authenticity of internship certificates issued by Dronacharya Public School by entering the student's roll number below.
+            </p>
+          </div>
+
+          <div className="max-w-xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Roll Number</label>
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  value={rollInput}
+                  onChange={(e) => {
+                    setRollInput(e.target.value);
+                    setVerificationResult(null);
+                  }}
+                  onKeyDown={handleRollKeyDown}
+                  placeholder="Enter Roll Number"
+                  className="flex-1 border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:border-blue-500 transition text-base"
+                />
+                <button
+                  onClick={handleVerify}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 active:scale-95 transition flex items-center gap-2 shadow"
+                >
+                  <Search className="w-5 h-5" />
+                  Verify
+                </button>
+              </div>
+            </div>
+
+            {verificationResult === 'found' && (
+              <div className="bg-green-50 border-2 border-green-400 rounded-2xl shadow-xl p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0" />
+                  <div>
+                    <p className="text-2xl font-bold text-green-700">Verified</p>
+                    <p className="text-sm text-green-600">Internship record found and verified</p>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Name', value: VERIFIED_RECORD.name },
+                    { label: "Father's Name", value: VERIFIED_RECORD.fatherName },
+                    { label: 'Roll No', value: VERIFIED_RECORD.rollNo },
+                    { label: 'Course', value: VERIFIED_RECORD.course },
+                    { label: 'College Name', value: VERIFIED_RECORD.college },
+                    { label: 'Internship Course', value: VERIFIED_RECORD.internshipCourse },
+                    { label: 'Duration', value: VERIFIED_RECORD.duration },
+                    { label: 'Hours', value: VERIFIED_RECORD.hours },
+                  ].map(({ label, value }) => (
+                    <div key={label} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 py-2 border-b border-green-200 last:border-0">
+                      <span className="text-sm font-semibold text-green-800 sm:w-40 flex-shrink-0">{label}</span>
+                      <span className="text-gray-800 font-medium">{value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {verificationResult === 'not-found' && (
+              <div className="bg-red-50 border-2 border-red-400 rounded-2xl shadow-xl p-8 flex items-start gap-4">
+                <AlertCircle className="w-8 h-8 text-red-500 flex-shrink-0 mt-1" />
+                <div>
+                  <p className="text-xl font-bold text-red-700 mb-1">No Record Found</p>
+                  <p className="text-red-600 text-sm">
+                    The roll number <span className="font-semibold">{rollInput}</span> does not match any internship record in our system. Please check the roll number and try again.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Visit us or contact us for admission inquiries. We're here to answer all your questions.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 mb-12">
+            <div className="bg-white p-8 rounded-2xl shadow-xl">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Address</p>
+                    <p className="text-gray-600">Near Parshuram Bhawan, Duliya Bass</p>
+                    <p className="text-gray-600">Sujangarh, Rajasthan - 331507</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Phone Numbers</p>
+                    <p className="text-gray-600">+91 81045 66005</p>
+                    <p className="text-gray-600">+91 89497 56700</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Email</p>
+                    <p className="text-gray-600">dpssujangarh@gmail.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">School Hours</p>
+                    <p className="text-gray-600">Monday - Saturday</p>
+                    <p className="text-gray-600">8:00 AM - 2:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 rounded-2xl shadow-xl">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Principal</h3>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+                  <GraduationCap className="w-10 h-10 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-xl font-bold text-gray-900">Mr. Deepak Sharma</p>
+                  <p className="text-blue-600 font-semibold">Principal</p>
+                  <p className="text-gray-600 text-sm">DRONACHARYA PUBLIC SCHOOL</p>
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Under the visionary leadership of Mr. Deepak Sharma, DRONACHARYA PUBLIC SCHOOL has grown into a premier educational institution, providing a nurturing and stimulating environment for young learners.
+              </p>
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="font-semibold text-gray-900 mb-2">Admission Inquiry</p>
+                <p className="text-gray-700 text-sm mb-4">
+                  We welcome children from Playgroup to Class 6th. Contact us for admission details, fee structure, and school tour.
+                </p>
+                <a
+                  href="tel:+918104566005"
+                  className="block w-full text-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
+                >
+                  Call for Admission
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Map */}
+          <div className="bg-white p-4 rounded-2xl shadow-xl">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Location</h3>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.123456789012!2d74.12345678901234!3d27.98765432109876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDU5JzE1LjYiTiA3NMKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+              width="100%"
+              height="400"
+              style={{ border: 0, borderRadius: '1rem' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="DPS School Location"
+            ></iframe>
+            <a
+              href="https://maps.app.goo.gl/9Zd6tasi9MerkCLj8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+            >
+              <MapPin className="w-5 h-5" />
+              Open in Google Maps
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-blue-800 to-blue-900 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <img src={logoImage} alt="DPS Logo" className="w-10 h-10 rounded-full" />
+                <div>
+                  <p className="font-bold">DRONACHARYA PUBLIC SCHOOL</p>
+                  <p className="text-xs text-blue-200">Excellence in Education</p>
+                </div>
+              </div>
+              <p className="text-blue-200 text-sm leading-relaxed">
+                Nurturing young minds and building future leaders since 2020 in Sujangarh, Rajasthan.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-lg mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-blue-200">
+                <li><button onClick={() => scrollToSection('home')} className="hover:text-white transition">Home</button></li>
+                <li><button onClick={() => scrollToSection('about')} className="hover:text-white transition">About Us</button></li>
+                <li><button onClick={() => scrollToSection('facilities')} className="hover:text-white transition">Facilities</button></li>
+                <li><button onClick={() => scrollToSection('verification')} className="hover:text-white transition">Internship Verification</button></li>
+                <li><button onClick={() => scrollToSection('contact')} className="hover:text-white transition">Contact</button></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-lg mb-4">Contact Us</h4>
+              <ul className="space-y-2 text-blue-200 text-sm">
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  <span>+91 81045 66005</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  <span>+91 89497 56700</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  <span>dpssujangarh@gmail.com</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
+                  <span>Near Parshuram Bhawan, Duliya Bass, Sujangarh, Rajasthan - 331507</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-blue-700 pt-6 text-center text-blue-300 text-sm">
+            <p>&copy; {new Date().getFullYear()} Dronacharya Public School, Sujangarh. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
